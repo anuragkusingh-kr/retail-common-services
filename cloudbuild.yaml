@@ -20,7 +20,7 @@ steps:
   args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA', '.' ]
 logsBucket: 'gs://${PROJECT_ID}_cloudbuild'
 options:
-    logging: CLOUD_LOGGING_ONLY
+    logging: GCS_ONLY #CLOUD_LOGGING_ONLY
 - id: 'push spez prod image'
   name: 'gcr.io/cloud-builders/docker'
   args: [ 'push', 'gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA' ]
