@@ -18,6 +18,8 @@ steps:
 - id: 'build spez prod image'
   name: 'gcr.io/cloud-builders/docker'
   args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA', '.' ]
+  options:
+      logging: CLOUD_LOGGING_ONLY
 - id: 'push spez prod image'
   name: 'gcr.io/cloud-builders/docker'
   args: [ 'push', 'gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA' ]
@@ -33,13 +35,13 @@ steps:
 #  - --trigger-topic=updates
 #  - --service-account=$_SERVICE_ACCOUNT
 #  - --source=functions/lastprocessedtimestamp/.
-- id: 'create deployment from template'
-  name: bash
-  args:
-  - '-c'
-  - |-
-    sed -e 's/IMAGE_TAG/$SHORT_SHA/g' < .cloudbuild-kubernetes/deployment.template.yaml > .cloudbuild-kubernetes/deployment.yaml
-    cat .cloudbuild-kubernetes/deployment.yaml
+# - id: 'create deployment from template'
+#   name: bash
+#   args:
+#   - '-c'
+#   - |-
+#     sed -e 's/IMAGE_TAG/$SHORT_SHA/g' < .cloudbuild-kubernetes/deployment.template.yaml > .cloudbuild-kubernetes/deployment.yaml
+#     cat .cloudbuild-kubernetes/deployment.yaml
 #- id: 'deploy spez prod image'
 #  name: gcr.io/cloud-builders/kubectl
 #  env:
