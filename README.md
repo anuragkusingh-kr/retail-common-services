@@ -1,6 +1,6 @@
 # Retail Common Services Foundation
 
-## How to build.
+## How to build
 
 ### local development
 
